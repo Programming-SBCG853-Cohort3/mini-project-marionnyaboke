@@ -77,7 +77,7 @@ def find_all_ORFs_oneframe(dna):
         dna: a DNA sequence
         returns: a list of non-nested ORFs
     >>> find_all_ORFs_oneframe("ATGCATGAATGTAGATAGATGTGCCC")
-    ['ATGCATGAATGTAGA', 'ATGTGCCC']
+    ['ATGCATGAATGTAG', 'ATGTGCCC']
     """
     # TODO: implement this
     pass
