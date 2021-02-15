@@ -106,7 +106,6 @@ def rest_of_ORF(dna):
                 indexs_stop.append(loc)
                 stop_at = loc
 
-        print(indexs_stop, "\n")
 
     if  "TAA" in Orf1:
         stop_at = -1
@@ -122,7 +121,6 @@ def rest_of_ORF(dna):
                 indexs_stop.append(loc)
                 stop_at = loc
 
-        print(indexs_stop, "\n")
 
     if  "TAG" in Orf1:
         stop_at = -1
@@ -165,7 +163,6 @@ def find_all_ORFs_oneframe(dna):
     Orf1 = [] 
         
     Orf1.append([dna[i:i + 3] for i in range(0, len(dna), 3)])
-    print(Orf1)
     
     for i in range(0,len(Orf1),1): 
         start=0
@@ -286,7 +283,6 @@ def find_all_ORFs_both_strands(dna):
 
     for i in range(0, len(rev_dna), 3 ):
         Orf4.append( rev_dna[0+int(i):3+int(i)] )
-    print("ORF4 IS ---->", Orf4, "\n")
 
     #ORF5
 
@@ -320,7 +316,6 @@ def find_all_ORFs_both_strands(dna):
         else:
             indexs_start.append(loc)
             start_at = loc
-    print("Start codon positions: ")        
 
     #find and index all stops in dna
     if  "TGA" in Orf1:
@@ -379,6 +374,7 @@ def find_all_ORFs_both_strands(dna):
             start+=1
     my_string =",".join(listOfOrf).replace(" ","")
     my_list = my_string.split(",")
+    
     return my_list
 
 
@@ -495,13 +491,12 @@ def gene_finder(dna):
         returns: a list of all amino acid sequences coded by the sequence dna.
     """
     # TODO: implement this
-    dna = 'ATGAAGCATTAAACCACAAAGATGTGTAGATGAGCACT'
 
     all_genes = []
 
     for i in find_all_ORFs_both_strands(dna):
-           return (all_genes.append(coding_strand_to_AA(i)))
-
+        all_genes.append(coding_strand_to_AA(i))
+    return all_genes
 
 
 import csv
@@ -512,9 +507,10 @@ def main():
 
 
 def menu():
-    print(" WELCOME TO GENE FINDER")        
+    print("WELCOME TO GENE FINDER")        
     print()
-
+    global dna
+    dna = load_seq(input("Please enter a valid file path: "))
     choice = input("""
                         Select an option
                       [A] Get complement
@@ -559,6 +555,7 @@ def menu():
         menu()
 
 main()
+
 
 if __name__ == "__main__":
     import doctest
